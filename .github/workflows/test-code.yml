@@ -27,6 +27,18 @@ jobs:
         run: |
           FOLDER_NAME=$(echo $BRANCH_NAME | sed 's/feature\/\(.*\)/\1/')
           echo "FOLDER_NAME=$FOLDER_NAME" >> $GITHUB_ENV
+          
+      - name: Install cargo-tarpaulin
+        run: cargo install cargo-tarpaulin --force
+
+      - name: Generate coverage report
+        run: cargo tarpaulin --out Xml --export-type Coveralls
+
+      - name: Upload coverage report
+        uses: coverallsapp/github-action@v2.2.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./target/kcov/merged/coverage.lcov
 
       - name: Change directory and run tests
         run: cd exercises && cd $FOLDER_NAME && cargo test --verbose      
