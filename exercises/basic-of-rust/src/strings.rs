@@ -1,0 +1,136 @@
+// Exercise 1
+#[allow(dead_code)]
+fn exercise1(color: &str) -> String {
+    match color {
+        "white" => "white".to_string(),
+        "black" => "black".to_string(),
+        "blue" => "blue".to_string(),
+        "green" => "green".to_string(),
+        "yellow" => "yellow".to_string(),
+        "red" => "red".to_string(),
+        _ => "unknown".to_string(),
+    }
+}
+
+// Exercise 2
+// Fix all errors without adding newline
+fn exercise2() -> String {
+    let mut s = String::from("hello");
+    s.push_str(",");
+    s.push_str(" world");
+    s += "!";
+    s
+}
+// Exercise 3
+// Fix errors without removing any line
+fn exercise3() -> String {
+    let s1 = String::from("hello,");
+    let s2 = String::from("world!");
+    let s3 = format!("{} {}", s1, s2);
+    s3    
+}
+
+// Exercise 4
+// Reverse a string
+
+fn reverse_string(input: &str) -> String {
+    let mut result = String::new();
+    for c in input.chars().rev() {
+        result.push(c);
+    }
+    result
+}
+
+
+// Exercise 5
+// Check if a string is a palindrome
+fn is_palindrome(word: &str) -> bool {
+    // Convert the word to lowercase for case-insensitive comparison
+    let word = word.to_lowercase();
+    // Get the bytes of the word as a slice
+    let bytes = word.as_bytes();
+    // Initialize two indices, one from the start and one from the end
+    let mut i = 0;
+    let mut j = bytes.len() - 1;
+    // Loop until the indices meet or cross
+    while i < j {
+        // If the characters at the indices are not equal, return false
+        if bytes[i] != bytes[j] {
+            return false;
+        }
+        // Increment the start index and decrement the end index
+        i += 1;
+        j -= 1;
+    }
+    // If the loop finishes, return true
+    return true;
+}
+
+
+// Exercise 6
+// Count the occurrences of a character in a string
+fn count_char_occurrences(string: &str, ch: char) -> usize {
+    let mut count = 0;
+    for c in string.chars() {
+        if c == ch {
+            count += 1;
+        }
+    }
+    return count;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // Test for exercise 1
+    #[test]
+    fn exercise1_work() {
+        assert_eq!("white".to_string(), exercise1("white"));
+    }
+
+    // Test for exercise 2
+    #[test]
+    fn exercise2_work() {
+        assert_eq!("hello, world!".to_string(), exercise2());
+    }
+
+    // Test for exercise 3
+    #[test]
+    fn exercise3_work() {
+        assert_eq!("hello, world!".to_string(), exercise3());
+    }
+    
+    // Test for exercise 4
+    #[test]
+    fn test_reverse_string() {
+        assert_eq!(reverse_string("hello"), "olleh");
+        assert_eq!(reverse_string("rust"), "tsur");
+        assert_eq!(reverse_string("world"), "dlrow");
+        assert_eq!(reverse_string(""), "");
+    }
+
+    // Test for exercise 5
+    #[test]
+    fn test_palindrome() {
+        assert_eq!(is_palindrome("level"), true);
+        assert_eq!(is_palindrome("deed"), true);
+        assert_eq!(is_palindrome("Rotor"), true);
+    }
+    // Test for exercise 5
+    #[test]
+    fn test_non_palindrome() {
+        assert_eq!(is_palindrome("hello"), false);
+        assert_eq!(is_palindrome("world"), false);
+    }
+
+    // Test for exercise 6
+
+    #[test]
+    fn test_count_char_occurrences() {
+        assert_eq!(count_char_occurrences("Hello", 'l'), 2);
+        // assert_eq!(count_char_occurrences("Rust is fun", 'u'), 1); // wrong test case
+        assert_eq!(count_char_occurrences("Mississippi", 's'), 4);
+    }
+
+}
