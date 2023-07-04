@@ -32,10 +32,10 @@ jobs:
         run: cargo install cargo-tarpaulin --force
 
       - name: Generate coverage report
-        run: cargo tarpaulin --out Xml --export-type Coveralls
+        run: cargo tarpaulin --out Xml
 
       - name: Upload coverage report
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./target/kcov/merged/coverage.lcov
