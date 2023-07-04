@@ -29,4 +29,4 @@ jobs:
           echo "FOLDER_NAME=$FOLDER_NAME" >> $GITHUB_ENV
 
       - name: Change directory and run tests
-        run: cd exercises && cd ${{ steps.folder_name.outputs.FOLDER_NAME }} && cargo test --verbose      
+        run: cd exercises && cd $FOLDER_NAME && cargo test --verbose      
