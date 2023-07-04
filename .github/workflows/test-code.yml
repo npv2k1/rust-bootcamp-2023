@@ -29,10 +29,10 @@ jobs:
           echo "FOLDER_NAME=$FOLDER_NAME" >> $GITHUB_ENV
 
       - name: Install cargo-tarpaulin
-        run: cargo install cargo-tarpaulin --force
+        run: cargo install cargo-tarpaulin
 
       - name: Generate coverage report
-        run: cargo tarpaulin --out Xml
+        run: cd exercises && cd $FOLDER_NAME && cargo tarpaulin --out Xml
 
       - name: Upload coverage report
         uses: coverallsapp/github-action@master
